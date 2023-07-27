@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use DateTime;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -59,16 +60,31 @@ class User extends Authenticatable
         'profile_photo_url',
     ];
 
-    public function admin(){
+    public function admin()
+    {
         return $this->hasOne(Admin::class);
     }
-    public function doctor(){
+    public function doctor()
+    {
         return $this->hasOne(Doctor::class);
     }
-    public function enfermera(){
+    public function enfermera()
+    {
         return $this->hasOne(Enfermera::class);
     }
-    public function paciente(){
+    public function paciente()
+    {
         return $this->hasOne(Paciente::class);
+    }
+    public function getAge()
+    {
+        $birthDate = DateTime::createFromFormat('Y-m-d', $this->birth_date);
+        // Obtener la fecha actual
+        $today = new DateTime();
+        // Calcular la diferencia entre las dos fechas (fecha de nacimiento y fecha actual)
+        $diff = $today->diff($birthDate);
+        // Obtener la edad del usuario en años
+        $age = $diff->y;
+        return $age;
     }
 }

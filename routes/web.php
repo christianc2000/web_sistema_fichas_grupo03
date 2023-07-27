@@ -27,4 +27,5 @@ Route::middleware([
     })->name('dashboard');
     Route::get('/menu', [App\Http\Controllers\Web\UserController::class, 'menu'])->name('menu');
     Route::get('/perfil', [App\Http\Controllers\Web\UserController::class, 'perfil'])->name('perfil');
+    Route::resource('/user', App\Http\Controllers\Web\UserController::class)->names('user');
 });

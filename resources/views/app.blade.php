@@ -46,7 +46,7 @@
                 <div class="aside-logo flex-column-auto" id="kt_aside_logo">
                     <!--begin::Logo-->
                     <a href="{{route('menu')}}">
-                        <img alt="Logo" src="{{ asset('img/logowhite.png') }}" class="h-70px logo" />
+                        <img alt="Logo" src="{{ asset('img/logo_white_letras_3.png') }}" class="h-70px logo" />
                     </a>
                     <!--end::Logo-->
                     <!--begin::Aside toggler-->
@@ -88,9 +88,6 @@
                             </div>
                             <div data-kt-menu-trigger="click" class="menu-item menu-accordion">
 
-
-
-
                                 <div class="menu-item">
                                     <a class="menu-link" href="{{ route('perfil') }}">
                                         <span class="menu-bullet">
@@ -106,7 +103,7 @@
                                 </div>
 
                                 <div class="menu-item">
-                                    <a class="menu-link" href="#">
+                                    <a class="menu-link" href="{{route('user.index')}}">
                                         <span class="menu-bullet">
                                             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
                                                 fill="currentColor" class="bi bi-house-heart" viewBox="0 0 16 16">
