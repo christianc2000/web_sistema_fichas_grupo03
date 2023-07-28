@@ -25,9 +25,19 @@ class User extends Authenticatable
      * @var string[]
      */
     protected $fillable = [
-        'name',
-        'email',
-        'password',
+        'ci', 
+        'name', 
+        'lastname', 
+        'birth_date', 
+        'gender', 
+        'photo',
+        'number_phone', 
+        'marital_status', 
+        'current_residence', 
+        'type', 
+        'email', 
+        'password', 
+        'registration_date'
     ];
 
     /**
@@ -66,15 +76,15 @@ class User extends Authenticatable
     }
     public function doctor()
     {
-        return $this->hasOne(Doctor::class);
+        return $this->hasOne(Doctor::class,'id','id');
     }
     public function enfermera()
     {
-        return $this->hasOne(Enfermera::class);
+        return $this->hasOne(Enfermera::class,'id','id');
     }
     public function paciente()
     {
-        return $this->hasOne(Paciente::class);
+        return $this->hasOne(Paciente::class,'id','id');
     }
     public function getAge()
     {

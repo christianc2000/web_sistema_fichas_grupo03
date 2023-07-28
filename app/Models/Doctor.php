@@ -12,6 +12,6 @@ class Doctor extends Model
     protected $table = 'doctors';
 
     public function user(){
-        return $this->belongsTo(User::class);
+        return $this->belongsTo(User::class,'id','id');
     }
 }
