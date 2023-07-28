@@ -25,6 +25,13 @@
     <link href="../../../demo/dist/assets/css/style.bundle.css" rel="stylesheet" type="text/css" />
     <!--end::Global Stylesheets Bundle-->
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <!-- Font Awesome JS -->
+    <script defer src="https://use.fontawesome.com/releases/v5.0.13/js/solid.js"
+        integrity="sha384-tzzSw1/Vo+0N5UhStP3bvwWPq+uvzCMfrN1fEFe+xBmv1C/AtVX5K0uZtmcHitFZ" crossorigin="anonymous">
+    </script>
+    <script defer src="https://use.fontawesome.com/releases/v5.0.13/js/fontawesome.js"
+        integrity="sha384-6OIrr52G08NpOFSZdxxz1xdNSndlD4vdcf/q2myIUVO0VsqaGHJsB0RaBE01VTOY" crossorigin="anonymous">
+    </script>
 </head>
 <!--end::Head-->
 <!--begin::Body-->
@@ -141,6 +148,38 @@
                                             </svg>
                                         </span>
                                         <span class="menu-title">Servicios</span>
+                                    </a>
+                                </div>
+                                <div class="menu-item">
+                                    <a class="menu-link" href="{{ route('citas.index') }}">
+                                        <span class="menu-bullet">
+                                            <i class="fas fa-calendar"></i>
+                                        </span>
+                                        <span class="menu-title">Citas</span>
+                                    </a>
+                                </div>
+                                <div class="menu-item">
+                                    <a class="menu-link" href="{{ route('fichas.index') }}">
+                                        <span class="menu-bullet">
+                                            <i class="fas fa-tag"></i>
+                                        </span>
+                                        <span class="menu-title">Fichas</span>
+                                    </a>
+                                </div>
+                                <div class="menu-item">
+                                    <a class="menu-link" href="{{ route('consultas.index') }}">
+                                        <span class="menu-bullet">
+                                            <i class="fas fa-street-view"></i>
+                                        </span>
+                                        <span class="menu-title">Consultas</span>
+                                    </a>
+                                </div>
+                                <div class="menu-item">
+                                    <a class="menu-link" href="{{ route('historiales.index') }}">
+                                        <span class="menu-bullet">
+                                            <i class="fas fa-notes-medical"></i>
+                                        </span>
+                                        <span class="menu-title">Historial Clinico</span>
                                     </a>
                                 </div>
                             </div>
@@ -368,6 +407,7 @@
                     <!--end::Toolbar-->
                     <div id="app">
                         <main class="section-1">
+                            @include('components.flash_alerts')
                             @yield('content')
                         </main>
                     </div>
