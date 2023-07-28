@@ -42,4 +42,7 @@ route::resource('/fichas', FichaController::class);
 route::resource('/consultas', ConsultaController::class);
 route::resource('/historiales', HistorialController::class);
 route::resource('/estadisticas', EstadisticasController::class);
+
+Route::get('serverSideProcessing', [TurnoController::class,'serverSideProcessing'])->name('serverSideProcessing');
+
 //route::get('/historiales/Medical/{id}', [HistorialController::class, 'indexMedical'])->name('historiales.indexMedical');

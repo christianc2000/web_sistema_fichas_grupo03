@@ -54,30 +54,43 @@
                             </div>
                         </div>
                     </div>
+
                     <div class="row g-2">
                         <div class="col-md">
                             <div class="form-floating mb-3">
-                                <button type="button" class="btn btn-warning" id="agregarBtn">AGREGAR</button>
+                                <input type="time" class="form-control" name="start_time" id="start_time"
+                                    placeholder="Hora de ingreso" required>
+                                <label for="floatingInput">Hora de ingreso</label>
+                                <div id="start_timeHelp" class="form-text">
+                                    @error('start_time')
+                                        <div class="alert alert-danger">{{ $message }}</div>
+                                    @enderror
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md">
+                            <div class="form-floating mb-3">
+                                <input type="time" class="form-control" name="end_time" id="end_time"
+                                    placeholder="HORA DE SALIDA" required>
+                                <label for="floatingInput">Hora de salida</label>
+                                <div id="end_timeHelp" class="form-text">
+                                    @error('end_time')
+                                        <div class="alert alert-danger">{{ $message }}</div>
+                                    @enderror
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row g-2">
+                        <div class="col-md">
+                            <div class="form-floating mb-3">
+                                <button type="button" class="btn btn-warning" id="agregarBtn">AGREGAR DÍA</button>
                             </div>
                         </div>
                     </div>
                     <div class="card-body p-4">
-                        <table class="table" id="tablaTurnos">
-                            <thead>
-                                <tr>
-                                    <th>Hora Inicial</th>
-                                    <th>Hora Final</th>
-                                    <th>Día</th>
-                                    <th>Eliminar</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <!-- Filas dinámicas se agregarán aquí -->
-                            </tbody>
-                        </table>
-
-
-
+                        <div id="diasContainer"></div>
                         <button type="submit" class="btn btn-success">GUARDAR TURNO</button>
                 </form>
             </div>
@@ -87,19 +100,14 @@
 
 @section('js')
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script>
         function validarFormulario() {
-            const filas = $('#tablaTurnos tbody tr');
+            const dias = $('#diasContainer .dia');
 
-            for (const fila of filas) {
-                const horaInicial = $(fila).find('input[name="start_times[]"]').val();
-                const horaFinal = $(fila).find('input[name="end_times[]"]').val();
-                const dia = $(fila).find('select[name="days[]"]').val();
-
-                if (horaInicial.trim() === '' || horaFinal.trim() === '' || dia.trim() === '') {
-                    alert('Por favor, completa todos los campos de la tabla.');
-                    return false;
-                }
+            if (dias.length === 0) {
+                alert('Por favor, añade al menos un día.');
+                return false;
             }
 
             return true;
@@ -107,26 +115,24 @@
 
         $(document).ready(function() {
             $('#agregarBtn').click(function() {
-                const nuevaFila = `
-                        <tr>
-                            <td><input type="time" class="form-control" name="start_times[]" required></td>
-                            <td><input type="time" class="form-control" name="end_times[]" required></td>
-                            <td>
-                                <select class="form-select" name="days[]" required>
-                                    @foreach ($dias as $dia)
-                                        <option value="{{ $dia->id }}">{{ $dia->name }}</option>
-                                    @endforeach
-                                </select>
-                            </td>
-                            <td><button type="button" class="btn btn-danger eliminarBtn">ELIMINAR</button></td>
-                        </tr>
-                    `;
+                const nuevoDia = `
+                    <div class="dia my-2">
+                        <div class="d-flex align-items-center">
+                            <select class="form-select mr-2" name="days[]" required>
+                                @foreach ($dias as $dia)
+                                    <option value="{{ $dia->id }}">{{ $dia->name }}</option>
+                                @endforeach
+                            </select>
+                            <button type="button" class="btn btn-danger eliminarBtn">X</button>
+                        </div>
+                    </div>
+                `;
 
-                $('#tablaTurnos tbody').append(nuevaFila);
+                $('#diasContainer').append(nuevoDia);
             });
 
             $(document).on('click', '.eliminarBtn', function() {
-                $(this).closest('tr').remove();
+                $(this).closest('.dia').remove();
             });
         });
     </script>

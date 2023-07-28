@@ -79,7 +79,7 @@
                             <div class="form-floating mb-3">
                                 <select class="form-select" id="gender" name="gender"
                                     aria-label="Floating label select example" required>
-                                    <option value="M" selected>Maculino</option>
+                                    <option value="M" selected>Masculino</option>
                                     <option value="F">Femenino</option>
                                 </select>
                                 <label for="floatingSelect">Sexo</label>

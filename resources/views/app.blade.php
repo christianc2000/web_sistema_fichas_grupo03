@@ -10,7 +10,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/izitoast/1.4.0/css/iziToast.css"
         integrity="sha512-DIW4FkYTOxjCqRt7oS9BFO+nVOwDL4bzukDyDtMO7crjUZhwpyrWBFroq+IqRe6VnJkTpRAS6nhDvf0w+wHmxg=="
         crossorigin="anonymous" referrerpolicy="no-referrer" />
-    <link rel="shortcut icon" href="../../img/logowhite.png" />
+
     <!--begin::Fonts-->
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700" />
     <!--end::Fonts-->
@@ -90,11 +90,21 @@
 
                             <div class="menu-item">
                                 <div class="menu-content pt-8 pb-2">
-                                    <span class="menu-section text-muted text-uppercase fs-8 ls-1">Opciones</span>
+                                    <span class="menu-section text-muted text-uppercase fs-8 ls-1">
+                                        @if (auth()->user()->type === 'A')
+                                            BIENVENIDO ADMIN
+                                        @elseif (auth()->user()->type === 'D')
+                                            BIENVENIDO DOCTOR
+                                        @elseif(auth()->user()->type === 'E')
+                                            BIENVENIDO ENFERMER@
+                                        @elseif(auth()->user()->type === 'P')
+                                            BIENVEIDO PACIENTE
+                                        @endif
+                                    </span>
                                 </div>
                             </div>
                             <div data-kt-menu-trigger="click" class="menu-item menu-accordion">
-
+                                {{-- acceso a todos --}}
                                 <div class="menu-item">
                                     <a class="menu-link" href="{{ route('perfil') }}">
                                         <span class="menu-bullet">
@@ -108,85 +118,87 @@
                                         <span class="menu-title">Perfil</span>
                                     </a>
                                 </div>
-
-                                <div class="menu-item">
-                                    <a class="menu-link" href="{{ route('user.index') }}">
-                                        <span class="menu-bullet">
-                                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
-                                                fill="currentColor" class="bi bi-house-heart" viewBox="0 0 16 16">
-                                                <path
-                                                    d="M8 6.982C9.664 5.309 13.825 8.236 8 12 2.175 8.236 6.336 5.309 8 6.982Z" />
-                                                <path
-                                                    d="M8.707 1.5a1 1 0 0 0-1.414 0L.646 8.146a.5.5 0 0 0 .708.707L2 8.207V13.5A1.5 1.5 0 0 0 3.5 15h9a1.5 1.5 0 0 0 1.5-1.5V8.207l.646.646a.5.5 0 0 0 .708-.707L13 5.793V2.5a.5.5 0 0 0-.5-.5h-1a.5.5 0 0 0-.5.5v1.293L8.707 1.5ZM13 7.207V13.5a.5.5 0 0 1-.5.5h-9a.5.5 0 0 1-.5-.5V7.207l5-5 5 5Z" />
-                                            </svg>
-                                        </span>
-                                        <span class="menu-title">Usuarios</span>
-                                    </a>
-                                </div>
-                                <div class="menu-item">
-                                    <a class="menu-link" href="{{ route('turno.index') }}">
-                                        <span class="menu-bullet">
-                                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
-                                                fill="currentColor" class="bi bi-bell-fill" viewBox="0 0 16 16">
-                                                <path
-                                                    d="M8 16a2 2 0 0 0 2-2H6a2 2 0 0 0 2 2zm.995-14.901a1 1 0 1 0-1.99 0A5.002 5.002 0 0 0 3 6c0 1.098-.5 6-2 7h14c-1.5-1-2-5.902-2-7 0-2.42-1.72-4.44-4.005-4.901z" />
-                                            </svg>
-                                        </span>
-                                        <span class="menu-title">Turnos</span>
-                                    </a>
-                                </div>
-                                <div class="menu-item">
-                                    <a class="menu-link" href="#">
-                                        <span class="menu-bullet">
-                                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
-                                                fill="currentColor" class="bi bi-phone-fill" viewBox="0 0 16 16">
-                                                <path
-                                                    d="M3 2a2 2 0 0 1 2-2h6a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V2zm6 11a1 1 0 1 0-2 0 1 1 0 0 0 2 0z" />
-                                            </svg>
-                                        </span>
-                                        <span class="menu-title">Servicios</span>
-                                    </a>
-                                </div>
-                                <div class="menu-item">
-                                    <a class="menu-link" href="{{ route('citas.index') }}">
-                                        <span class="menu-bullet">
-                                            <i class="fas fa-calendar"></i>
-                                        </span>
-                                        <span class="menu-title">Citas</span>
-                                    </a>
-                                </div>
-                                <div class="menu-item">
-                                    <a class="menu-link" href="{{ route('fichas.index') }}">
-                                        <span class="menu-bullet">
-                                            <i class="fas fa-tag"></i>
-                                        </span>
-                                        <span class="menu-title">Fichas</span>
-                                    </a>
-                                </div>
-                                <div class="menu-item">
-                                    <a class="menu-link" href="{{ route('consultas.index') }}">
-                                        <span class="menu-bullet">
-                                            <i class="fas fa-street-view"></i>
-                                        </span>
-                                        <span class="menu-title">Consultas</span>
-                                    </a>
-                                </div>
-                                <div class="menu-item">
-                                    <a class="menu-link" href="{{ route('historiales.index') }}">
-                                        <span class="menu-bullet">
-                                            <i class="fas fa-notes-medical"></i>
-                                        </span>
-                                        <span class="menu-title">Historial Clinico</span>
-                                    </a>
-                                </div>
-                                <div class="menu-item">
-                                    <a class="menu-link" href="{{ route('estadisticas.create') }}">
-                                        <span class="menu-bullet">
-                                            <i class="fas fa-chart-line"></i>
-                                        </span>
-                                        <span class="menu-title">Estadisticas</span>
-                                    </a>
-                                </div>
+                                {{-- -ACCESO ADMIN, DOCTOR, ENFERMERA --}}
+                                @if (auth()->user()->type === 'A' || (auth()->user()->type === 'E' || auth()->user()->type === 'D'))
+                                    <div class="menu-item">
+                                        <a class="menu-link" href="{{ route('user.index') }}">
+                                            <span class="menu-bullet">
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                                                    fill="currentColor" class="bi bi-house-heart" viewBox="0 0 16 16">
+                                                    <path
+                                                        d="M8 6.982C9.664 5.309 13.825 8.236 8 12 2.175 8.236 6.336 5.309 8 6.982Z" />
+                                                    <path
+                                                        d="M8.707 1.5a1 1 0 0 0-1.414 0L.646 8.146a.5.5 0 0 0 .708.707L2 8.207V13.5A1.5 1.5 0 0 0 3.5 15h9a1.5 1.5 0 0 0 1.5-1.5V8.207l.646.646a.5.5 0 0 0 .708-.707L13 5.793V2.5a.5.5 0 0 0-.5-.5h-1a.5.5 0 0 0-.5.5v1.293L8.707 1.5ZM13 7.207V13.5a.5.5 0 0 1-.5.5h-9a.5.5 0 0 1-.5-.5V7.207l5-5 5 5Z" />
+                                                </svg>
+                                            </span>
+                                            <span class="menu-title">Usuarios</span>
+                                        </a>
+                                    </div>
+                                @endif
+                                @if (auth()->user()->type === 'A')
+                                    <div class="menu-item">
+                                        <a class="menu-link" href="{{ route('turno.index') }}">
+                                            <span class="menu-bullet">
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                                                    fill="currentColor" class="bi bi-bell-fill" viewBox="0 0 16 16">
+                                                    <path
+                                                        d="M8 16a2 2 0 0 0 2-2H6a2 2 0 0 0 2 2zm.995-14.901a1 1 0 1 0-1.99 0A5.002 5.002 0 0 0 3 6c0 1.098-.5 6-2 7h14c-1.5-1-2-5.902-2-7 0-2.42-1.72-4.44-4.005-4.901z" />
+                                                </svg>
+                                            </span>
+                                            <span class="menu-title">Turnos</span>
+                                        </a>
+                                    </div>
+                                @endif
+                                @if (auth()->user()->type === 'A' || auth()->user()->type === 'D')
+                                    <div class="menu-item">
+                                        <a class="menu-link" href="{{ route('citas.index') }}">
+                                            <span class="menu-bullet">
+                                                <i class="fas fa-calendar"></i>
+                                            </span>
+                                            <span class="menu-title">Citas</span>
+                                        </a>
+                                    </div>
+                                @endif
+                                @if (auth()->user()->type === 'A' || auth()->user()->type === 'E')
+                                    <div class="menu-item">
+                                        <a class="menu-link" href="{{ route('fichas.index') }}">
+                                            <span class="menu-bullet">
+                                                <i class="fas fa-tag"></i>
+                                            </span>
+                                            <span class="menu-title">Fichas</span>
+                                        </a>
+                                    </div>
+                                @endif
+                                @if (auth()->user()->type === 'D' || auth()->user()->type === 'A')
+                                    <div class="menu-item">
+                                        <a class="menu-link" href="{{ route('consultas.index') }}">
+                                            <span class="menu-bullet">
+                                                <i class="fas fa-street-view"></i>
+                                            </span>
+                                            <span class="menu-title">Consultas</span>
+                                        </a>
+                                    </div>
+                                @endif
+                                @if (auth()->user()->type === 'D' || (auth()->user()->type === 'A' || (auth()->user()->type = 'E')))
+                                    <div class="menu-item">
+                                        <a class="menu-link" href="{{ route('historiales.index') }}">
+                                            <span class="menu-bullet">
+                                                <i class="fas fa-notes-medical"></i>
+                                            </span>
+                                            <span class="menu-title">Historial Clinico</span>
+                                        </a>
+                                    </div>
+                                @endif
+                                @if (auth()->user()->type === 'A')
+                                    <div class="menu-item">
+                                        <a class="menu-link" href="{{ route('estadisticas.create') }}">
+                                            <span class="menu-bullet">
+                                                <i class="fas fa-chart-line"></i>
+                                            </span>
+                                            <span class="menu-title">Estadisticas</span>
+                                        </a>
+                                    </div>
+                                @endif
                             </div>
                         </div>
                         <!--end::Menu-->
@@ -271,106 +283,6 @@
 
 
                         </div>
-
-                        <ul class="navbar-nav float-left">
-                            <!-- Notifications Dropdown Menu -->
-                            <li class="nav-item dropdown float-left">
-
-                                <!--  <div class="dropdown ml-auto">-->
-                                <a class="me-3 mr-3 dropdown-toggle hidden-arrow" href="#"
-                                    id="navbarDropdownMenuLink" role="button" data-mdb-toggle="dropdown"
-                                    aria-expanded="false">
-                                    <span class="menu-bullet">
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
-                                            fill="currentColor" class="bi bi-bell-fill" viewBox="0 0 16 16">
-                                            <path
-                                                d="M8 16a2 2 0 0 0 2-2H6a2 2 0 0 0 2 2zm.995-14.901a1 1 0 1 0-1.99 0A5.002 5.002 0 0 0 3 6c0 1.098-.5 6-2 7h14c-1.5-1-2-5.902-2-7 0-2.42-1.72-4.44-4.005-4.901z" />
-                                        </svg>
-                                    </span>
-                                    <!--NOTIFICACIONES-->
-                                    {{--                  @if (count(auth()->user()->unreadNotifications) > 0)
-                                        <span
-                                            class="badge rounded-pill badge-notification bg-danger count-notification">{{ count(auth()->user()->unreadNotifications) }}</span>
-                                    @else
-                                        <span
-                                            class="badge rounded-pill badge-notification bg-danger count-notification"></span>
-                                    @endif --}}
-                                    <span class="badge rounded-pill badge-notification bg-danger"></span>
-                                </a>
-                                <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right scrollspy-example"
-                                    aria-labelledby="navbarDropdownMenuLink">
-                                    <span class="dropdown-header border-bottom"
-                                        style="background: rgb(226, 223, 223)">NOTIFICACIONES SIN LEER</span>
-                                    <div class="lista-notification">
-
-                                        {{--    @forelse (auth()->user()->unreadNotifications->take(3) as $notification)
-                                            <a href={{ route("notification.index") }} class="dropdown-item border-bottom me-1 unotification"
-                                                id="{{ $notification->created_at }}">
-                                                <div class="row">
-                                                    <div class="col-12 title"><i class="fas fa-envelope mr-2"></i>
-                                                        {{ $notification->data['nombre'] }}</div>
-                                                    <div class="col-12"><small
-                                                            class="ml-2 float-end text-muted text-sm time"
-                                                            style="font-size: 0.6rem">{{ $notification->created_at->diffForHumans() }}</small>
-                                                    </div>
-
-                                                </div>
-                                            </a>
-
-                                        @empty
-                                            <div class="row snotification">
-                                                <div class="col-12">
-                                                    <span class="float-end text-muted text-sm">Sin notificaciones por
-                                                        leer </span>
-                                                </div>
-                                            </div>
-                                        @endforelse
-
-                                        @if (count(auth()->user()->unreadNotifications) > 2)
-                                            <a href="{{ route('notification.index') }}"
-                                                class="dropdown-item border-bottom me-1" id="ver-mas">
-                                                <div class="row">
-                                                    <div class="col-12 bg-gray">
-                                                        Ver más Notificaciones...</div>
-                                                </div>
-                                            </a>
-                                        @endif
-                                    </div>
-                                    <span class="dropdown-header border-bottom"
-                                        style="background: rgb(226, 223, 223)">NOTIFICACIONES LEÍDAS</span>
-                                    @php
-                                        $i = 1;
-                                    @endphp
-                                    @forelse (auth()->user()->readNotifications->take(3) as $notification)
-                                        @if ($i < 4)
-                                            <a href="#" class="dropdown-item mb-0">
-                                                <div class="row">
-                                                    <div class="col-12"><i class="fas fa-users mr-2"></i>
-                                                        {{ $notification->data['nombre'] }}</div>
-                                                    <div class="col-12"><small
-                                                            class="ml-3 float-end text-muted text-sm"
-                                                            style="font-size: 0.6rem">{{ $notification->created_at->diffForHumans() }}</small>
-                                                    </div>
-                                                </div>
-                                            </a>
-                                            @php
-                                                $i++;
-                                            @endphp
-                                        @endif
-                                    @empty
-                                        <div class="row">
-                                            <div class="col-12">
-                                                <span class=" float-end text-muted text-sm">Sin notificaciones leidas
-                                                </span>
-                                            </div>
-                                        </div>
-                                    @endforelse
-                                    <a href="{{ route('markAsRead') }}"
-                                        class="dropdown-item dropdown-footer border-top">Marcar
-                                        todas como leídas</a> --}}
-                                    </div>
-                            </li>
-                        </ul>
                         <!--end::Aside mobile toggle-->
                         <!--begin::Mobile logo-->
 
@@ -509,7 +421,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.4/moment.min.js"></script>
 
 
-   
+
     @yield('js')
     <!--end::Page Custom Javascript-->
     <!--end::Javascript-->

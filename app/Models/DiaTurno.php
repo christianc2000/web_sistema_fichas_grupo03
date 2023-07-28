@@ -8,14 +8,16 @@ use Illuminate\Database\Eloquent\Model;
 class DiaTurno extends Model
 {
     use HasFactory;
-    
-    protected $fillable=[];
+
+    protected $fillable = ['day_id', 'turn_id'];
     protected $table = 'day_turn';
 
-    public function turno(){
-        return $this->belongsTo(Turno::class,'turn_id','id');
+    public function turno()
+    {
+        return $this->belongsTo(Turno::class, 'turn_id', 'id');
     }
-    public function dia(){
-        return $this->belongsTo(Dia::class,'day_id','id');
+    public function dia()
+    {
+        return $this->belongsTo(Dia::class, 'day_id', 'id');
     }
 }

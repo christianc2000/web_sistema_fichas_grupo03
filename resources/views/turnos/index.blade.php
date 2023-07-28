@@ -5,11 +5,17 @@
 @stop
 
 @section('content')
+    @if (Session::has('success'))
+        <div class="alert alert-success">
+            {{ Session::get('success') }}
+        </div>
+    @endif
     <div class="container-fluid d-flex justify-content-center aling-items-center">
         <div class="card" style="width: 100%;">
             <div class="card-header" style="display: flex; align-items: center;">
                 <div class="button-container" style="margin: -5px;">
-                    <a href="{{ route('turno.create') }}" class="btn btn-warning pt-2 pb-2 mx-1" style="max-height: 40px;">CREAR
+                    <a href="{{ route('turno.create') }}" class="btn btn-warning pt-2 pb-2 mx-1"
+                        style="max-height: 40px;">CREAR
                         TURNO</a>
                 </div>
             </div>
@@ -19,7 +25,7 @@
                     <label class="form-label">{{ $dia->name }}</label>
                 </div>
                 <div class="card-body p-4">
-                    <table class="table table-striped hover table-data" id="{{ $dia->name }}" style="width:100%">
+                    <table class="table table-striped hover table-data" id="myTable" style="width:100%">
                         <thead>
                             <tr>
                                 <th>ID</th>
@@ -27,34 +33,13 @@
                                 <th>DURACIÓN</th>
                                 <th>SALA</th>
                                 <th>ACTIVO</th>
-                                <th></th>
                                 <th>OPCIONES</th>
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach ($dia->diaturnos as $dt)
-                                <tr>
-                                    <td>{{ $dt->turn_id }}</td>
-                                    <td>{{ $dt->turno->name }}</td>
-                                    <td>{{ $dt->turno->start_time }}-{{ $dt->turno->end_time }}</td>
-                                    <td>{{ $dt->turno->sala->name }}</td>
-                                    <td>{{ $dt->turno->active == 1 ? 'Ocupado' : 'Disponible' }}</td>
-                                    <td>
-
-                                    </td>
-                                    <td>
-                                        <div class="dropdown">
-                                            <button class="dropbtn">Opciones</button>
-                                            <div class="dropdown-content">
-                                                <a href="#">Ocupar Turno</a>
-                                                <a href="#">Finalizar Turno</a>
-                                            </div>
-                                        </div>
-                                    </td>
-                                </tr>
-                            @endforeach
                         </tbody>
                     </table>
+
                 </div>
             @endforeach
         </div>
@@ -133,6 +118,39 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
 
     <script>
+        $('#myTable').DataTable({
+            processing: true,
+            serverSide: true,
+            ajax: '{{ route('serverSideProcessing') }}',
+            columns: [{
+                    data: 'id',
+                    name: 'id'
+                },
+                {
+                    data: 'turno',
+                    name: 'turno'
+                },
+                {
+                    data: 'duracion',
+                    name: 'duracion'
+                },
+                {
+                    data: 'sala',
+                    name: 'sala'
+                },
+                {
+                    data: 'activo',
+                    name: 'activo'
+                },
+                {
+                    data: 'opciones',
+                    name: 'opciones',
+                    orderable: false,
+                    searchable: false
+                },
+            ]
+        });
+
         $(document).on('click', '.dropbtn', function() {
             const dropdown = $(this).next('.dropdown-content');
             $('.dropdown-content').not(dropdown).removeClass('show');
