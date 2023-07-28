@@ -15,16 +15,16 @@
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700" />
     <!--end::Fonts-->
     <!--begin::Page Vendor Stylesheets(used by this page)-->
-    <link href="../../../demo/dist/assets/plugins/custom/fullcalendar/fullcalendar.bundle.css" rel="stylesheet"
+    <link href="{{ asset('demo/dist/assets/plugins/custom/fullcalendar/fullcalendar.bundle.css')}}" rel="stylesheet"
         type="text/css" />
-    <link href="../../../demo/dist/assets/plugins/custom/datatables/datatables.bundle.css" rel="stylesheet"
+    <link href="{{asset('demo/dist/assets/plugins/custom/datatables/datatables.bundle.css')}}" rel="stylesheet"
         type="text/css" />
     <!--end::Page Vendor Stylesheets-->
     <!--begin::Global Stylesheets Bundle(used by all pages)-->
-    <link href="../../../demo/dist/assets/plugins/global/plugins.bundle.css" rel="stylesheet" type="text/css" />
-    <link href="../../../demo/dist/assets/css/style.bundle.css" rel="stylesheet" type="text/css" />
+    <link href="{{ asset('demo/dist/assets/plugins/global/plugins.bundle.css')}}" rel="stylesheet" type="text/css" />
+    <link href="{{ asset('demo/dist/assets/css/style.bundle.css')}}"  rel="stylesheet" type="text/css" />
     <!--end::Global Stylesheets Bundle-->
-    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
     <!-- Font Awesome JS -->
     <script defer src="https://use.fontawesome.com/releases/v5.0.13/js/solid.js"
         integrity="sha384-tzzSw1/Vo+0N5UhStP3bvwWPq+uvzCMfrN1fEFe+xBmv1C/AtVX5K0uZtmcHitFZ" crossorigin="anonymous">
@@ -367,7 +367,7 @@
     <div id="kt_scrolltop" class="scrolltop" data-kt-scrolltop="true">
         <!--begin::Svg Icon | path: icons/duotune/arrows/arr066.svg-->
         <span class="svg-icon">
-            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+            <svg xmlns="https://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
                 fill="none">
                 <rect opacity="0.5" x="13" y="6" width="13" height="2" rx="1"
                     transform="rotate(90 13 6)" fill="black" />
@@ -387,34 +387,34 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/izitoast/1.4.0/js/iziToast.min.js"
         integrity="sha512-Zq9o+E00xhhR/7vJ49mxFNJ0KQw1E1TMWkPTxrWcnpfEFDEXgUiwJHIKit93EW/XxE31HSI5GEOW06G6BF1AtA=="
         crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-    <script src="/js/app.js"></script>
+    <script src="{{asset('js/app.js')}}"></script>
     <script src="https://code.jquery.com/jquery-3.6.1.js" integrity="sha256-3zlB5s2uwoUzrXK3BT7AX3FyvojsraNFxCc2vC/7pNI="
         crossorigin="anonymous"></script>
     <!--begin::Global Javascript Bundle(used by all pages)-->
-    <script src="../../../demo/dist/assets/plugins/global/plugins.bundle.js"></script>
-    <script src="../../../demo/dist/assets/js/scripts.bundle.js"></script>
+    <script src="{{asset('demo/dist/assets/plugins/global/plugins.bundle.js')}}"></script>
+    <script src="{{asset('demo/dist/assets/js/scripts.bundle.js')}}"></script>
     <!--end::Global Javascript Bundle-->
     <!--begin::Page Vendors Javascript(used by this page)-->
-    <script src="../../../demo/dist/assets/plugins/custom/fullcalendar/fullcalendar.bundle.js"></script>
-    <script src="../../../demo/dist/assets/plugins/custom/datatables/datatables.bundle.js"></script>
+    <script src="{{asset('demo/dist/assets/plugins/custom/fullcalendar/fullcalendar.bundle.js')}}"></script>
+    <script src="{{asset('demo/dist/assets/plugins/custom/datatables/datatables.bundle.js')}}"></script>
     <!--end::Page Vendors Javascript-->
     <!--begin::Page Custom Javascript(used by this page)-->
-    <script src="../../../demo/dist/assets/js/widgets.bundle.js"></script>
-    <script src="../../../demo/dist/assets/js/custom/widgets.js"></script>
-    <script src="../../../demo/dist/assets/js/custom/apps/chat/chat.js"></script>
-    <script src="../../../demo/dist/assets/js/custom/utilities/modals/upgrade-plan.js"></script>
-    <script src="../../../demo/dist/assets/js/custom/utilities/modals/create-app.js"></script>
-    <script src="../../../demo/dist/assets/js/custom/utilities/modals/users-search.js"></script>
-    <script src="../../../demo/dist/assets/js/custom/apps/user-management/users/list/table.js"></script>
+    <script src="{{asset('demo/dist/assets/js/widgets.bundle.js')}}"></script>
+    <script src="{{asset('demo/dist/assets/js/custom/widgets.js')}}"></script>
+    <script src="{{asset('demo/dist/assets/js/custom/apps/chat/chat.js')}}"></script>
+    <script src="{{asset('demo/dist/assets/js/custom/utilities/modals/upgrade-plan.js')}}"></script>
+    <script src="{{asset('demo/dist/assets/js/custom/utilities/modals/create-app.js')}}"></script>
+    <script src="{{asset('demo/dist/assets/js/custom/utilities/modals/users-search.js')}}"></script>
+    <script src="{{asset('demo/dist/assets/js/custom/apps/user-management/users/list/table.js')}}"></script>
 
     {{--  <script src="../../../demo/dist/assets/js/custom/apps/user-management/users/list/export-users.js"></script>  --}}
 
-    <script src="../../../demo/dist/assets/js/widgets.bundle.js"></script>
-    <script src="../../../demo/dist/assets/js/custom/widgets.js"></script>
-    <script src="../../../demo/dist/assets/js/custom/apps/chat/chat.js"></script>
-    <script src="../../../demo/dist/assets/js/custom/utilities/modals/upgrade-plan.js"></script>
-    <script src="../../../demo/dist/assets/js/custom/utilities/modals/create-app.js"></script>
-    <script src="../../../demo/dist/assets/js/custom/utilities/modals/users-search.js"></script>
+    <script src="{{asset('demo/dist/assets/js/widgets.bundle.js')}}"></script>
+    <script src="{{asset('demo/dist/assets/js/custom/widgets.js')}}"></script>
+    <script src="{{asset('demo/dist/assets/js/custom/apps/chat/chat.js')}}"></script>
+    <script src="{{asset('demo/dist/assets/js/custom/utilities/modals/upgrade-plan.js')}}"></script>
+    <script src="{{asset('demo/dist/assets/js/custom/utilities/modals/create-app.js')}}"></script>
+    <script src="{{asset('demo/dist/assets/js/custom/utilities/modals/users-search.js')}}"></script>
     {{--        <script src="../../../demo/dist/assets/js/custom/apps/calendar/calendar.js"></script>  --}}
 
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/6.0.0/mdb.min.js"></script>

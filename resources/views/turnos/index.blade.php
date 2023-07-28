@@ -52,7 +52,8 @@
 
     <script>
         $('[id^="myTable_"]').each(function() {
-            var diaId = this.id.split('_')[1];
+            var diaId = parseInt(this.id.split('_')[1])+1;
+            console.log('dia id:', diaId);
             $(this).DataTable({
                 processing: true,
                 serverSide: true,
