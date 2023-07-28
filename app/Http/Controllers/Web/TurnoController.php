@@ -4,7 +4,9 @@ namespace App\Http\Controllers\Web;
 
 use App\Http\Controllers\Controller;
 use App\Models\Dia;
+use App\Models\Sala;
 use App\Models\Turno;
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class TurnoController extends Controller
@@ -16,9 +18,8 @@ class TurnoController extends Controller
      */
     public function index()
     {
-        
-        $dias=Dia::all();
-        return view('turnos.index',compact('dias'));
+        $dias = Dia::all();
+        return view('turnos.index', compact('dias'));
     }
 
     /**
@@ -28,7 +29,9 @@ class TurnoController extends Controller
      */
     public function create()
     {
-        //
+        $users = User::where('type', 'D')->get();
+        $dias = Dia::all();
+        return view('turnos.create', compact('users', 'dias'));
     }
 
     /**
@@ -39,7 +42,14 @@ class TurnoController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        return $request;
+        $room = Sala::create(['name' => $request->room]);
+        /*$turno=Turno::create([
+            'name'=>$request->name, 
+            'active'=>true, 
+            'start_time'=>'', 'end_time'
+        ]);*/
+        // return $request;
     }
 
     /**

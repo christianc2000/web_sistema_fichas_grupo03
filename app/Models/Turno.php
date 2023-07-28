@@ -30,10 +30,12 @@ class Turno extends Model
     }
     public function turnodoctorActivo()
     {
-        foreach ($this->doctorturnos() as $td) {
-            if ($td->end_date != null) {
-                return $td->doctor;
+
+        foreach ($this->doctorturnos as $td) {
+            if ($td->end_date === null) {
+                return $td->doctor->user->name;
             }
         }
+        return null;
     }
 }

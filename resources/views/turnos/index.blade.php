@@ -5,21 +5,21 @@
 @stop
 
 @section('content')
-
     <div class="container-fluid d-flex justify-content-center aling-items-center">
         <div class="card" style="width: 100%;">
             <div class="card-header" style="display: flex; align-items: center;">
                 <div class="button-container" style="margin: -5px;">
-                    <a href="{{ route('user.create') }}" class="btn btn-warning pt-2 pb-2 mx-1" style="max-height: 40px;">CREAR
+                    <a href="{{ route('turno.create') }}" class="btn btn-warning pt-2 pb-2 mx-1" style="max-height: 40px;">CREAR
                         TURNO</a>
                 </div>
             </div>
+
             @foreach ($dias as $dia)
                 <div class="px-4" style="justify-content: center">
-                    <label class="form-label ">{{ $dia->name }}</label>
+                    <label class="form-label">{{ $dia->name }}</label>
                 </div>
                 <div class="card-body p-4">
-                    <table id={{ $dia->name }} class="table table-striped hover" style="width:100%">
+                    <table class="table table-striped hover table-data" id="{{ $dia->name }}" style="width:100%">
                         <thead>
                             <tr>
                                 <th>ID</th>
@@ -27,6 +27,7 @@
                                 <th>DURACIÓN</th>
                                 <th>SALA</th>
                                 <th>ACTIVO</th>
+                                <th></th>
                                 <th>OPCIONES</th>
                             </tr>
                         </thead>
@@ -37,8 +38,9 @@
                                     <td>{{ $dt->turno->name }}</td>
                                     <td>{{ $dt->turno->start_time }}-{{ $dt->turno->end_time }}</td>
                                     <td>{{ $dt->turno->sala->name }}</td>
-                                    <td>{{ $dt->turno->active == 1 ? '<p class="bg-green">Ocupado</p> ' : '<p class="bg-red">Disponible</p>' }}
-                                    
+                                    <td>{{ $dt->turno->active == 1 ? 'Ocupado' : 'Disponible' }}</td>
+                                    <td>
+
                                     </td>
                                     <td>
                                         <div class="dropdown">
@@ -46,18 +48,15 @@
                                             <div class="dropdown-content">
                                                 <a href="#">Ocupar Turno</a>
                                                 <a href="#">Finalizar Turno</a>
-
                                             </div>
                                         </div>
                                     </td>
                                 </tr>
                             @endforeach
-
                         </tbody>
                     </table>
                 </div>
             @endforeach
-
         </div>
     </div>
 @stop
@@ -106,9 +105,6 @@
             z-index: 1;
             top: -200%;
             /* Ajusta este valor según sea necesario */
-
-            /* Ajusta este valor según sea necesario */
-
         }
 
         /* Estilos para los elementos <a> dentro del menú desplegable */
@@ -137,15 +133,6 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
 
     <script>
-        $(document).ready(function() {
-            $('#Lunes').DataTable();
-            $('#Martes').DataTable();
-            $('#Miercoles').DataTable();
-            $('#Jueves').DataTable();
-            $('#Viernes').DataTable();
-            $('#Sabado').DataTable();
-        });
-
         $(document).on('click', '.dropbtn', function() {
             const dropdown = $(this).next('.dropdown-content');
             $('.dropdown-content').not(dropdown).removeClass('show');
@@ -157,11 +144,5 @@
                 $('.dropdown-content').removeClass('show');
             }
         });
-
-        /*function confirmDelete() {
-            if (confirm('¿Estás seguro de que deseas eliminar este usuario?')) {
-                document.getElementById('delete-form').submit();
-            }
-        }*/
     </script>
 @stop

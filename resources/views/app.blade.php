@@ -472,7 +472,6 @@
     <script>
         var hostUrl = "../../../demo/dist/assets/";
     </script>
-    <script src="https://js.pusher.com/7.2/pusher.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/izitoast/1.4.0/js/iziToast.min.js"
         integrity="sha512-Zq9o+E00xhhR/7vJ49mxFNJ0KQw1E1TMWkPTxrWcnpfEFDEXgUiwJHIKit93EW/XxE31HSI5GEOW06G6BF1AtA=="
         crossorigin="anonymous" referrerpolicy="no-referrer"></script>
@@ -510,23 +509,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.4/moment.min.js"></script>
 
 
-    <script>
-        // Enable pusher logging - don't include this in production
-        //        Pusher.logToConsole = true;
-        var id = "{{ Auth::user()->id }}";
-        var pusher = new Pusher('109c670c473fed2434ca', {
-            cluster: 'us2',
-        });
-
-        const state = pusher.connection.state;
-        console.log(state);
-        var id = "{{ Auth::user()->id }}";
-        console.log('channel-' + id);
-        var canal = 'channel' + id;
-        var evento = 'event-' + id;
-        console.log(canal);
-        console.log(evento);
-    </script>
+   
     @yield('js')
     <!--end::Page Custom Javascript-->
     <!--end::Javascript-->
