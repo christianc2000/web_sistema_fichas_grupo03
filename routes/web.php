@@ -5,6 +5,7 @@ use App\Http\Controllers\ConsultaController;
 use App\Http\Controllers\EstadisticasController;
 use App\Http\Controllers\FichaController;
 use App\Http\Controllers\HistorialController;
+use App\Http\Controllers\Web\TurnoController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -33,6 +34,7 @@ Route::middleware([
     Route::get('/menu', [App\Http\Controllers\Web\UserController::class, 'menu'])->name('menu');
     Route::get('/perfil', [App\Http\Controllers\Web\UserController::class, 'perfil'])->name('perfil');
     Route::resource('/user', App\Http\Controllers\Web\UserController::class)->names('user');
+    Route::resource('/turno', TurnoController::class)->names('turno');
 });
 
 route::resource('/citas', CitaController::class);

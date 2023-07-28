@@ -30,7 +30,7 @@
 				<div class="d-flex flex-center flex-column flex-column-fluid p-10 pb-lg-20">
 					<!--begin::Logo-->
 					<a href="#" class="mb-10">
-						<img alt="Logo" src="../../img/lgoo.png" class="h-100px" />
+						<img alt="Logo" src="../../img/logo_gray.png" class="h-100px" />
 					</a>
 					<!--end::Logo-->
 					<!--begin::Wrapper-->
@@ -44,8 +44,7 @@
 								<h1 class="text-dark mb-3">Inicio de Sesión</h1>
 								<!--end::Title-->
 								<!--begin::Link-->
-								<div class="text-gray-400 fw-bold fs-4">Eres nuevo?
-								<a href="register" class="link-primary fw-bolder">Crear nueva cuenta</a></div>
+							
 								<!--end::Link-->
 							</div>
 							<!--begin::Heading-->

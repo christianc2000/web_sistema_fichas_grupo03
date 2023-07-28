@@ -12,6 +12,6 @@ class Dia extends Model
     protected $table = 'days';
 
     public function diaturnos(){
-       return $this->hasMany(DiaTurno::class);
+       return $this->hasMany(DiaTurno::class,'day_id','id');
     }
 }

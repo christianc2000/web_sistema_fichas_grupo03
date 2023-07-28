@@ -52,7 +52,7 @@
                 <!--begin::Brand-->
                 <div class="aside-logo flex-column-auto" id="kt_aside_logo">
                     <!--begin::Logo-->
-                    <a href="{{route('menu')}}">
+                    <a href="{{ route('menu') }}">
                         <img alt="Logo" src="{{ asset('img/logo_white_letras_3.png') }}" class="h-70px logo" />
                     </a>
                     <!--end::Logo-->
@@ -110,7 +110,7 @@
                                 </div>
 
                                 <div class="menu-item">
-                                    <a class="menu-link" href="{{route('user.index')}}">
+                                    <a class="menu-link" href="{{ route('user.index') }}">
                                         <span class="menu-bullet">
                                             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
                                                 fill="currentColor" class="bi bi-house-heart" viewBox="0 0 16 16">
@@ -124,7 +124,7 @@
                                     </a>
                                 </div>
                                 <div class="menu-item">
-                                    <a class="menu-link" href="#">
+                                    <a class="menu-link" href="{{ route('turno.index') }}">
                                         <span class="menu-bullet">
                                             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
                                                 fill="currentColor" class="bi bi-bell-fill" viewBox="0 0 16 16">
@@ -231,7 +231,8 @@
                                 style="margin-right: 10px" data-kt-menu-trigger="click" data-kt-menu-attach="parent"
                                 data-kt-menu-placement="bottom-end">
 
-                                <img src="{{ asset('img/pagre.jpg') }}" alt="user" />
+                                <img src="{{ auth()->user()->photo ? Storage::disk('s3')->url(auth()->user()->photo) : '#' }}"
+                                    alt="user" />
                                 <a href="{{ route('perfil') }}">
                                     <small class="text-muted fs-7 fw-bold my-1 ms-1">{{ auth()->user()->name }}
                                         {{ auth()->user()->apellido }}</small>
@@ -286,16 +287,15 @@
                                                 d="M8 16a2 2 0 0 0 2-2H6a2 2 0 0 0 2 2zm.995-14.901a1 1 0 1 0-1.99 0A5.002 5.002 0 0 0 3 6c0 1.098-.5 6-2 7h14c-1.5-1-2-5.902-2-7 0-2.42-1.72-4.44-4.005-4.901z" />
                                         </svg>
                                     </span>
-<!--NOTIFICACIONES-->
-                  {{--                  @if (count(auth()->user()->unreadNotifications) > 0)
+                                    <!--NOTIFICACIONES-->
+                                    {{--                  @if (count(auth()->user()->unreadNotifications) > 0)
                                         <span
                                             class="badge rounded-pill badge-notification bg-danger count-notification">{{ count(auth()->user()->unreadNotifications) }}</span>
                                     @else
                                         <span
                                             class="badge rounded-pill badge-notification bg-danger count-notification"></span>
-                                    @endif--}}
-                                    <span
-                                            class="badge rounded-pill badge-notification bg-danger"></span>
+                                    @endif --}}
+                                    <span class="badge rounded-pill badge-notification bg-danger"></span>
                                 </a>
                                 <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right scrollspy-example"
                                     aria-labelledby="navbarDropdownMenuLink">
@@ -303,7 +303,7 @@
                                         style="background: rgb(226, 223, 223)">NOTIFICACIONES SIN LEER</span>
                                     <div class="lista-notification">
 
-                                    {{--    @forelse (auth()->user()->unreadNotifications->take(3) as $notification)
+                                        {{--    @forelse (auth()->user()->unreadNotifications->take(3) as $notification)
                                             <a href={{ route("notification.index") }} class="dropdown-item border-bottom me-1 unotification"
                                                 id="{{ $notification->created_at }}">
                                                 <div class="row">
@@ -367,8 +367,8 @@
                                     @endforelse
                                     <a href="{{ route('markAsRead') }}"
                                         class="dropdown-item dropdown-footer border-top">Marcar
-                                        todas como leídas</a>--}}
-                                </div>
+                                        todas como leídas</a> --}}
+                                    </div>
                             </li>
                         </ul>
                         <!--end::Aside mobile toggle-->
@@ -526,8 +526,6 @@
         var evento = 'event-' + id;
         console.log(canal);
         console.log(evento);
-
-    
     </script>
     @yield('js')
     <!--end::Page Custom Javascript-->

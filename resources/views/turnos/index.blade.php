@@ -12,55 +12,51 @@
                 <div class="button-container" style="margin: -5px;">
                     <a href="{{ route('user.create') }}" class="btn btn-warning pt-2 pb-2 mx-1" style="max-height: 40px;">CREAR
                         TURNO</a>
-
-                    <button type="button" class="btn btn-warning pt-2 pb-2 mx-1" style="max-height: 40px;">ASIGNAR
-                        TURNO</button>
                 </div>
             </div>
-            <div class="card-body p-4">
-                <table id="table" class="table table-striped hover" style="width:100%">
-                    <thead>
-                        <tr>
-                            <th>ID</th>
-                            <th>NOMBRE</th>
-                            <th>HORA INICIO</th>
-                            <th>HORA FIN</th>
-                            <th>SALA</th>
-                            <th>OPCIONES</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        @foreach ($turnos as $turno)
+            @foreach ($dias as $dia)
+                <div class="px-4" style="justify-content: center">
+                    <label class="form-label ">{{ $dia->name }}</label>
+                </div>
+                <div class="card-body p-4">
+                    <table id={{ $dia->name }} class="table table-striped hover" style="width:100%">
+                        <thead>
                             <tr>
-                                <td>{{ $turno->id }}</td>
-                                <td>{{ $turno->name }}</td>
-                                <td>{{ $turno->start_time }}</td>
-                                <td>{{ $turno->end_time }}</td>
-                                <td>{{ $turno->room->name }}</td>
-                                <td>
-                                    <div class="dropdown">
-                                        <button class="dropbtn">Opciones</button>
-                                        <div class="dropdown-content">
-                                            <a href="{{ route('user.edit', $user->id) }}">Editar</a>
-
-                                            <form id="delete-form" action="{{ route('user.destroy', $user->id) }}"
-                                                method="POST">
-                                                @csrf
-                                                @method('DELETE')
-                                                <!-- Aquí puedes agregar otros campos ocultos con información adicional si lo necesitas -->
-
-                                                <a href="#"
-                                                    onclick="event.preventDefault(); confirmDelete();">Eliminar</a>
-                                            </form>
-                                        </div>
-                                    </div>
-                                </td>
+                                <th>ID</th>
+                                <th>TURNO</th>
+                                <th>DURACIÓN</th>
+                                <th>SALA</th>
+                                <th>ACTIVO</th>
+                                <th>OPCIONES</th>
                             </tr>
-                        @endforeach
+                        </thead>
+                        <tbody>
+                            @foreach ($dia->diaturnos as $dt)
+                                <tr>
+                                    <td>{{ $dt->turn_id }}</td>
+                                    <td>{{ $dt->turno->name }}</td>
+                                    <td>{{ $dt->turno->start_time }}-{{ $dt->turno->end_time }}</td>
+                                    <td>{{ $dt->turno->sala->name }}</td>
+                                    <td>{{ $dt->turno->active == 1 ? '<p class="bg-green">Ocupado</p> ' : '<p class="bg-red">Disponible</p>' }}
+                                    
+                                    </td>
+                                    <td>
+                                        <div class="dropdown">
+                                            <button class="dropbtn">Opciones</button>
+                                            <div class="dropdown-content">
+                                                <a href="#">Ocupar Turno</a>
+                                                <a href="#">Finalizar Turno</a>
 
-                    </tbody>
-                </table>
-            </div>
+                                            </div>
+                                        </div>
+                                    </td>
+                                </tr>
+                            @endforeach
+
+                        </tbody>
+                    </table>
+                </div>
+            @endforeach
 
         </div>
     </div>
@@ -142,7 +138,12 @@
 
     <script>
         $(document).ready(function() {
-            $('#table').DataTable();
+            $('#Lunes').DataTable();
+            $('#Martes').DataTable();
+            $('#Miercoles').DataTable();
+            $('#Jueves').DataTable();
+            $('#Viernes').DataTable();
+            $('#Sabado').DataTable();
         });
 
         $(document).on('click', '.dropbtn', function() {
@@ -157,10 +158,10 @@
             }
         });
 
-        function confirmDelete() {
+        /*function confirmDelete() {
             if (confirm('¿Estás seguro de que deseas eliminar este usuario?')) {
                 document.getElementById('delete-form').submit();
             }
-        }
+        }*/
     </script>
 @stop
