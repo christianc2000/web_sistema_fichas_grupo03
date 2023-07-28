@@ -1,5 +1,10 @@
 <?php
 
+use App\Http\Controllers\CitaController;
+use App\Http\Controllers\ConsultaController;
+use App\Http\Controllers\EstadisticasController;
+use App\Http\Controllers\FichaController;
+use App\Http\Controllers\HistorialController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -29,3 +34,10 @@ Route::middleware([
     Route::get('/perfil', [App\Http\Controllers\Web\UserController::class, 'perfil'])->name('perfil');
     Route::resource('/user', App\Http\Controllers\Web\UserController::class)->names('user');
 });
+
+route::resource('/citas', CitaController::class);
+route::resource('/fichas', FichaController::class);
+route::resource('/consultas', ConsultaController::class);
+route::resource('/historiales', HistorialController::class);
+route::resource('/estadisticas', EstadisticasController::class);
+//route::get('/historiales/Medical/{id}', [HistorialController::class, 'indexMedical'])->name('historiales.indexMedical');
