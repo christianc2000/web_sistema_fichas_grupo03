@@ -1,60 +1,42 @@
 @extends('app')
 
 @section('title')
-    USUARIOS
+    TURNOS
 @stop
 
 @section('content')
-    @if (Session::has('success'))
-        <div class="alert alert-success">
-            {{ Session::get('success') }}
-        </div>
-    @endif
-    @if (Session::has('delete'))
-        <div class="alert alert-warning">
-            {{ Session::get('delete') }}
-        </div>
-    @endif
+
     <div class="container-fluid d-flex justify-content-center aling-items-center">
         <div class="card" style="width: 100%;">
             <div class="card-header" style="display: flex; align-items: center;">
                 <div class="button-container" style="margin: -5px;">
-                    <a href="{{ route('user.create') }}" class="btn btn-warning pt-2 pb-2 mx-1"
-                        style="max-height: 40px;">CREAR
-                        USUARIO</a>
+                    <a href="{{ route('user.create') }}" class="btn btn-warning pt-2 pb-2 mx-1" style="max-height: 40px;">CREAR
+                        TURNO</a>
 
-                    <button type="button" class="btn btn-warning pt-2 pb-2 mx-1"
-                        style="max-height: 40px;">IMPRIMIR</button>
+                    <button type="button" class="btn btn-warning pt-2 pb-2 mx-1" style="max-height: 40px;">ASIGNAR
+                        TURNO</button>
                 </div>
             </div>
             <div class="card-body p-4">
                 <table id="table" class="table table-striped hover" style="width:100%">
                     <thead>
                         <tr>
-                            <th>CI</th>
+                            <th>ID</th>
                             <th>NOMBRE</th>
-                            <th>APELLIDO</th>
-                            <th>CORREO</th>
-                            <th>SEXO</th>
-                            <th>EDAD</th>
-                            <th>CELULAR</th>
-                            <th>TIPO</th>
-                            <th>REGISTRO</th>
+                            <th>HORA INICIO</th>
+                            <th>HORA FIN</th>
+                            <th>SALA</th>
                             <th>OPCIONES</th>
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach ($users as $user)
+                        @foreach ($turnos as $turno)
                             <tr>
-                                <td>{{ $user->ci }}</td>
-                                <td>{{ $user->name }}</td>
-                                <td>{{ $user->lastname }}</td>
-                                <td>{{ $user->email }}</td>
-                                <td>{{ $user->gender }}</td>
-                                <td>{{ $user->age }}</td>
-                                <td>{{ $user->number_phone }}</td>
-                                <td>{{ $user->type }}</td>
-                                <td>{{ $user->registration_date }}</td>
+                                <td>{{ $turno->id }}</td>
+                                <td>{{ $turno->name }}</td>
+                                <td>{{ $turno->start_time }}</td>
+                                <td>{{ $turno->end_time }}</td>
+                                <td>{{ $turno->room->name }}</td>
                                 <td>
                                     <div class="dropdown">
                                         <button class="dropbtn">Opciones</button>
