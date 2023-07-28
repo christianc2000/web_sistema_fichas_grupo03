@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\StoreHistorialRequest;
+use App\Http\Requests\UpdateHistorialRequest;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -56,7 +58,7 @@ class HistorialController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(StoreHistorialRequest $request)
     {
         //dd($request->all());
         $paciente = DB::table('users')->find($request->patient_id);
@@ -106,7 +108,7 @@ class HistorialController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(UpdateHistorialRequest $request, $id)
     {
         $paciente = DB::table('users')->find($request->patient_id);
         DB::table('clinic_historys')->where('id', $id)->update([

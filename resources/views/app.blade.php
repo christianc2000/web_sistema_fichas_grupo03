@@ -182,6 +182,14 @@
                                         <span class="menu-title">Historial Clinico</span>
                                     </a>
                                 </div>
+                                <div class="menu-item">
+                                    <a class="menu-link" href="{{ route('estadisticas.create') }}">
+                                        <span class="menu-bullet">
+                                            <i class="fas fa-chart-line"></i>
+                                        </span>
+                                        <span class="menu-title">Estadisticas</span>
+                                    </a>
+                                </div>
                             </div>
                         </div>
                         <!--end::Menu-->
