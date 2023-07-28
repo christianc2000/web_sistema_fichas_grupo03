@@ -16,29 +16,34 @@ class TurnoController extends Controller
 {
 
 
-    public function serverSideProcessing()
+    public function serverSideProcessing(Request $request)
     {
-        $dias = Dia::with('diaturnos')->get();
+        $diaId = $request->get('diaId');
 
-        return DataTables::of($dias)
-            ->addColumn('turno', function ($row) {
-                return $row->diaturnos->turno->name;
+        // Utiliza el diaId para obtener los datos de ese día específico
+        $dia = Dia::where('id', $diaId)->with('diaturnos')->first();
+
+        return DataTables::of($dia->diaturnos)
+            ->addColumn('turno', function ($diaturno) {
+                return $diaturno->turno->name;
             })
-            ->addColumn('duracion', function ($row) {
-                return $row->diaturnos->turno->start_time . '-' . $row->diaturnos->turno->end_time;
+            ->addColumn('duracion', function ($diaturno) {
+                return $diaturno->turno->start_time . '-' . $diaturno->turno->end_time;
             })
-            ->addColumn('sala', function ($row) {
-                return $row->diaturnos->turno->sala->name;
+            ->addColumn('sala', function ($diaturno) {
+                return $diaturno->turno->sala->name;
             })
-            ->addColumn('activo', function ($row) {
-                return $row->diaturnos->turno->active == 1 ? 'Ocupado' : 'Disponible';
+            ->addColumn('activo', function ($diaturno) {
+                return $diaturno->turno->active == 1 ? 'Ocupado' : 'Disponible';
             })
-            ->addColumn('opciones', function ($row) {
+            ->addColumn('opciones', function ($diaturno) {
                 // Devuelve el HTML para las opciones
                 return '<a href="#">Ocupar Turno</a><a href="#">Finalizar Turno</a>';
             })
+            ->rawColumns(['opciones'])  // <-- Agrega esto
             ->make(true);
     }
+
     /**
      * Display a listing of the resource.
      *
@@ -80,13 +85,14 @@ class TurnoController extends Controller
             'days.*' => 'required|integer|between:1,7'
         ]);
 
-        $room = Sala::create(['name' => $request->room]);
+        $sala = Sala::create(['name' => $request->room]);
+        
         $turno = Turno::create([
             'name' => $request->name,
             'active' => true,
             'start_time' => $request->start_time,
             'end_time' => $request->end_time,
-            'room_id' => $room->id
+            'room_id' => $sala->id
         ]);
         foreach ($request->days as $id_day) {
             DiaTurno::create([

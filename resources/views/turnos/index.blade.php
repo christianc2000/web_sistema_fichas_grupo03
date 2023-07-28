@@ -25,7 +25,7 @@
                     <label class="form-label">{{ $dia->name }}</label>
                 </div>
                 <div class="card-body p-4">
-                    <table class="table table-striped hover table-data" id="myTable" style="width:100%">
+                    <table class="table table-striped hover table-data" id="myTable_{{ $loop->index }}" style="width:100%">
                         <thead>
                             <tr>
                                 <th>ID</th>
@@ -39,116 +39,57 @@
                         <tbody>
                         </tbody>
                     </table>
-
                 </div>
             @endforeach
         </div>
     </div>
 @stop
-
-@section('css')
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.3.0/css/bootstrap.min.css">
-    <link rel="stylesheet" href="https://cdn.datatables.net/1.13.5/css/dataTables.bootstrap5.min.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.3.0/css/bootstrap.min.css">
-    <style>
-        .dropbtn {
-            height: 30px;
-            width: 100px;
-            background-color: #3498DB;
-            color: white;
-            align-items: center;
-            justify-items: center;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            display: flex;
-            justify-content: center;
-            /* Centrar horizontalmente el contenido del botón */
-            align-items: center;
-            /* Centrar verticalmente el contenido del botón */
-        }
-
-        .dropbtn:hover,
-        .dropbtn:focus {
-            background-color: #2980B9;
-        }
-
-        /* Estilos para el contenedor del menú desplegable */
-        .dropdown {
-            position: relative;
-            display: inline-block;
-        }
-
-        /* Estilos para el menú desplegable */
-        .dropdown-content {
-            display: none;
-            position: absolute;
-            background-color: #f1f1f1;
-            min-width: 160px;
-            overflow: auto;
-            box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
-            z-index: 1;
-            top: -200%;
-            /* Ajusta este valor según sea necesario */
-        }
-
-        /* Estilos para los elementos <a> dentro del menú desplegable */
-        .dropdown-content a {
-            height: 30px;
-            color: black;
-            padding: 12px 16px;
-            text-decoration: none;
-            display: flex;
-            align-items: center;
-        }
-
-        .dropdown a:hover {
-            background-color: #ddd;
-        }
-
-        .show {
-            display: block;
-        }
-    </style>
-@stop
-
+...
 @section('js')
     <script src="https://cdn.datatables.net/1.13.5/js/jquery.dataTables.min.js"></script>
     <script src="https://cdn.datatables.net/1.13.5/js/dataTables.bootstrap5.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
 
     <script>
-        $('#myTable').DataTable({
-            processing: true,
-            serverSide: true,
-            ajax: '{{ route('serverSideProcessing') }}',
-            columns: [{
-                    data: 'id',
-                    name: 'id'
+        $('[id^="myTable_"]').each(function() {
+            var diaId = this.id.split('_')[1];
+            $(this).DataTable({
+                processing: true,
+                serverSide: true,
+                ajax: {
+                    url: '{{ route('serverSideProcessing') }}',
+                    data: {
+                        diaId: diaId
+                    }
                 },
-                {
-                    data: 'turno',
-                    name: 'turno'
-                },
-                {
-                    data: 'duracion',
-                    name: 'duracion'
-                },
-                {
-                    data: 'sala',
-                    name: 'sala'
-                },
-                {
-                    data: 'activo',
-                    name: 'activo'
-                },
-                {
-                    data: 'opciones',
-                    name: 'opciones',
-                    orderable: false,
-                    searchable: false
-                },
-            ]
+                columns: [{
+                        data: 'id',
+                        name: 'id'
+                    },
+                    {
+                        data: 'turno',
+                        name: 'turno'
+                    },
+                    {
+                        data: 'duracion',
+                        name: 'duracion'
+                    },
+                    {
+                        data: 'sala',
+                        name: 'sala'
+                    },
+                    {
+                        data: 'activo',
+                        name: 'activo'
+                    },
+                    {
+                        data: 'opciones',
+                        name: 'opciones',
+                        orderable: false,
+                        searchable: false
+                    },
+                ]
+            });
         });
 
         $(document).on('click', '.dropbtn', function() {

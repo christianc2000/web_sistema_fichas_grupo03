@@ -9,7 +9,7 @@ class Turno extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['name', 'active', 'start_time', 'end_time'];
+    protected $fillable = ['name', 'active', 'start_time', 'end_time','room_id'];
     protected $table = 'turns';
 
     public function sala()
