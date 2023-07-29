@@ -23,8 +23,7 @@
                         style="max-height: 40px;">CREAR
                         USUARIO</a>
 
-                    <button type="button" class="btn btn-warning pt-2 pb-2 mx-1"
-                        style="max-height: 40px;">IMPRIMIR</button>
+                   
                 </div>
             </div>
             <div class="card-body p-4">
@@ -60,7 +59,10 @@
                                         <button class="dropbtn">Opciones</button>
                                         <div class="dropdown-content">
                                             <a href="{{ route('user.edit', $user->id) }}">Editar</a>
-
+                                            @if ($user->type === 'D')
+                                                <a href="{{ route('turno.user', $user->id) }}">Turno</a>
+                                            @endif
+                                          
                                             <form id="delete-form" action="{{ route('user.destroy', $user->id) }}"
                                                 method="POST">
                                                 @csrf

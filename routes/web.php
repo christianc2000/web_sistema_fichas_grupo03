@@ -6,6 +6,7 @@ use App\Http\Controllers\EstadisticasController;
 use App\Http\Controllers\FichaController;
 use App\Http\Controllers\HistorialController;
 use App\Http\Controllers\Web\TurnoController;
+use App\Http\Controllers\Web\UserController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -35,6 +36,7 @@ Route::middleware([
     Route::get('/perfil', [App\Http\Controllers\Web\UserController::class, 'perfil'])->name('perfil');
     Route::resource('/user', App\Http\Controllers\Web\UserController::class)->names('user');
     Route::resource('/turno', TurnoController::class)->names('turno');
+    Route::get('/turno-user/{id}', [UserController::class, 'turnos'])->name('turno.user');
 });
 
 route::resource('/citas', CitaController::class);
@@ -43,6 +45,6 @@ route::resource('/consultas', ConsultaController::class);
 route::resource('/historiales', HistorialController::class);
 route::resource('/estadisticas', EstadisticasController::class);
 
-Route::get('serverSideProcessing', [TurnoController::class,'serverSideProcessing'])->name('serverSideProcessing');
-
+Route::get('serverSideProcessing', [TurnoController::class, 'serverSideProcessing'])->name('serverSideProcessing');
+Route::get('serverSideProcessingTurno', [UserController::class, 'serverSideProcessingTurno'])->name('serverSideProcessingTurno');
 //route::get('/historiales/Medical/{id}', [HistorialController::class, 'indexMedical'])->name('historiales.indexMedical');

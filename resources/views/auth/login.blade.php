@@ -4,7 +4,7 @@
 <!--begin::Head-->
 
 <head>
-   
+    <base href="../../../">
     <title>Login</title>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -34,7 +34,7 @@
             <div class="d-flex flex-center flex-column flex-column-fluid p-10 pb-lg-20">
                 <!--begin::Logo-->
                 <a href="#" class="mb-10">
-                    <img alt="Logo" src="{{asset('img/logo_gray.png')}}" class="h-100px" />
+                    <img alt="Logo" src="{{ asset('img/logo_gray.png') }}" class="h-100px" />
                 </a>
                 <!--end::Logo-->
                 <!--begin::Wrapper-->
@@ -76,7 +76,7 @@
                                 <label class="form-label fw-bolder text-dark fs-6 mb-0">Contraseña</label>
                                 <!--end::Label-->
                                 <!--begin::Link-->
-                                <a href="../../demo/dist/authentication/layouts/dark/password-reset.html"
+                                <a href="{{ asset('demo/dist/authentication/layouts/dark/password-reset.html') }}"
                                     class="link-primary fs-6 fw-bolder">Olvidaste tu contraseña?</a>
                                 <!--end::Link-->
                             </div>
@@ -144,14 +144,14 @@
     <!--end::Main-->
     <!--begin::Javascript-->
     <script>
-        var hostUrl = "{{ asset('demo/dist/assets/') }}";
+        var hostUrl = "../demo/dist/assets/";
     </script>
     <!--begin::Global Javascript Bundle(used by all pages)-->
-    <script src="{{ asset('demo/dist/assets/plugins/global/plugins.bundle.js') }}"></script>
-    <script src="{{ asset('demo/dist/assets/js/scripts.bundle.js') }}"></script>
+    <script src="../demo/dist/assets/plugins/global/plugins.bundle.js"></script>
+    <script src="../demo/dist/assets/js/scripts.bundle.js"></script>
     <!--end::Global Javascript Bundle-->
     <!--begin::Page Custom Javascript(used by this page)-->
-    <script src="{{asset('demo/dist/assets/js/custom/authentication/sign-in/general.js') }}"></script>
+    <script src="{{ asset('demo/dist/assets/js/custom/authentication/sign-in/general.js') }}"></script>
     <!--end::Page Custom Javascript-->
     <!--end::Javascript-->
 </body>

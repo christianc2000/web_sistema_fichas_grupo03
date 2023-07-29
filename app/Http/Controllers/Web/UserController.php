@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Web;
 use App\Http\Controllers\Controller;
 use App\Models\Admin;
 use App\Models\Doctor;
+use App\Models\DoctorTurno;
 use App\Models\Enfermera;
 use App\Models\Paciente;
 use App\Models\User;
@@ -13,6 +14,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Storage;
+use Yajra\DataTables\DataTables;
 
 class UserController extends Controller
 {
@@ -324,7 +326,7 @@ class UserController extends Controller
                 $user->password = (isset($request->password)) ? bcrypt($request->password) : $user->password;
                 $user->save();
                 $paciente = Paciente::find($user->id);
-               
+
                 $paciente->occupation = (isset($request->occupation)) ? $request->occupation : $paciente->occupation;
                 $paciente->children = (isset($request->children)) ? $request->children : $paciente->children;
                 $paciente->save();
@@ -336,7 +338,35 @@ class UserController extends Controller
         Session::flash('success', 'El usuario ha sido registrado exitosamente.');
         return redirect()->route('user.index');
     }
+    public function serverSideProcessingTurno(Request $request)
+    {
+        $doctor_id = request('uId');
+        $turnos = Doctor::with('turno.sala')->find($doctor_id);
 
+        return DataTables::of($turnos->turno)
+            ->addColumn('id', function ($turn) {
+                return $turn->id;
+            })
+            ->addColumn('turno', function ($turn) {
+                return $turn->name;
+            })
+            ->addColumn('start_date', function ($turn) {
+                return $turn->start_date;
+            })
+            ->addColumn('sala', function ($turn) {
+                return $turn->room->name;
+            })
+            ->addColumn('activo', function ($turn) {
+                return $turn->turno->end_date == null ? 'Disponible' : 'Ocupado';
+            })
+            ->make(true);
+    }
+    public function turnos($id)
+    {
+        $doctor = Doctor::find($id);
+        $dturnos = $doctor->doctorturnos;
+        return view('user.turno', compact('doctor','dturnos'));
+    }
     public function show($id)
     {
     }
