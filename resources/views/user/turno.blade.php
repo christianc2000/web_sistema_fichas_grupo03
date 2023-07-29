@@ -25,7 +25,7 @@
                                     <td>{{ $dt->turno->name }}</td>
                                     <td>{{ $dt->start_date }}</td>
                                     <td>{{ $dt->end_date == null ? 'OCUPAD' : 'DISPONIBLE' }}</td>
-                                    <td>{{ $dt->turn->room->name }}</td>
+                                    <td>{{ $dt->turno->sala->name }}</td>
                                 </tr>
                             @endforeach
                         </tbody>
