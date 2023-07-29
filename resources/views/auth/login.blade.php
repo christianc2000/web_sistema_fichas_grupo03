@@ -34,7 +34,7 @@
             <div class="d-flex flex-center flex-column flex-column-fluid p-10 pb-lg-20">
                 <!--begin::Logo-->
                 <a href="#" class="mb-10">
-                    <img alt="Logo" src="../../img/logo_gray.png" class="h-100px" />
+                    <img alt="Logo" src="{{asset('img/logo_gray.png')}}" class="h-100px" />
                 </a>
                 <!--end::Logo-->
                 <!--begin::Wrapper-->
