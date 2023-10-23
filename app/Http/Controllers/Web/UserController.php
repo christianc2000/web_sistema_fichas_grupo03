@@ -365,14 +365,16 @@ class UserController extends Controller
     {
         $doctor = Doctor::find($id);
         $dturnos = $doctor->doctorturnos;
-        return view('user.turno', compact('doctor','dturnos'));
+        return view('user.turno', compact('doctor', 'dturnos'));
     }
     public function show($id)
     {
     }
     public function destroy($id)
     {
+
         $user = User::find($id);
+        return $user;
         $user->delete();
         Session::flash('delete', 'El usuario ' . $user->name . ' ha sido eliminado.');
         return redirect()->route('user.index');

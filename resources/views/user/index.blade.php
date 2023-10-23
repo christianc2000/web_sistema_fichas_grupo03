@@ -23,13 +23,14 @@
                         style="max-height: 40px;">CREAR
                         USUARIO</a>
 
-                   
+
                 </div>
             </div>
             <div class="card-body p-4">
                 <table id="table" class="table table-striped hover" style="width:100%">
                     <thead>
                         <tr>
+                            <th>ID</th>
                             <th>CI</th>
                             <th>NOMBRE</th>
                             <th>APELLIDO</th>
@@ -45,6 +46,7 @@
                     <tbody>
                         @foreach ($users as $user)
                             <tr>
+                                <td>{{ $user->id }}</td>
                                 <td>{{ $user->ci }}</td>
                                 <td>{{ $user->name }}</td>
                                 <td>{{ $user->lastname }}</td>
@@ -62,16 +64,8 @@
                                             @if ($user->type === 'D')
                                                 <a href="{{ route('turno.user', $user->id) }}">Turno</a>
                                             @endif
-                                          
-                                            <form id="delete-form" action="{{ route('user.destroy', $user->id) }}"
-                                                method="POST">
-                                                @csrf
-                                                @method('DELETE')
-                                                <!-- Aquí puedes agregar otros campos ocultos con información adicional si lo necesitas -->
-
-                                                <a href="#"
-                                                    onclick="event.preventDefault(); confirmDelete();">Eliminar</a>
-                                            </form>
+                                            <a href="" class="delete-btn"
+                                                data-user-id="{{ $user->id }}">Eliminar</a>
                                         </div>
                                     </div>
                                 </td>
@@ -82,6 +76,28 @@
                 </table>
             </div>
 
+        </div>
+    </div>
+    <!-- Add a modal for confirmation -->
+    <!-- Add a modal for confirmation -->
+    <div class="modal fade" id="confirmModal" tabindex="-1" role="dialog" aria-labelledby="confirmModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="confirmModalLabel">Confirmar Eliminación</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    ¿Estás seguro de que deseas eliminar este usuario?
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+                    <button type="button" class="btn btn-danger" id="confirmDeleteBtn">Eliminar</button>
+                </div>
+            </div>
         </div>
     </div>
 @stop
@@ -162,25 +178,64 @@
 
     <script>
         $(document).ready(function() {
-            $('#table').DataTable();
-        });
+            $(document).ready(function() {
+                $('#table').DataTable();
+            });
 
-        $(document).on('click', '.dropbtn', function() {
-            const dropdown = $(this).next('.dropdown-content');
-            $('.dropdown-content').not(dropdown).removeClass('show');
-            dropdown.toggleClass('show');
-        });
+            $(document).on('click', '.dropbtn', function() {
+                const dropdown = $(this).next('.dropdown-content');
+                $('.dropdown-content').not(dropdown).removeClass('show');
+                dropdown.toggleClass('show');
+            });
 
-        $(document).click(function(event) {
-            if (!$(event.target).closest('.dropdown').length) {
-                $('.dropdown-content').removeClass('show');
-            }
-        });
+            $(document).click(function(event) {
+                if (!$(event.target).closest('.dropdown').length) {
+                    $('.dropdown-content').removeClass('show');
+                }
+            });
 
-        function confirmDelete() {
-            if (confirm('¿Estás seguro de que deseas eliminar este usuario?')) {
-                document.getElementById('delete-form').submit();
-            }
-        }
+            var userIdToDelete = null;
+
+            // When the "Eliminar" link is clicked, set the userIdToDelete and show the confirmation modal
+            $(".delete-btn").on("click", function() {
+                userIdToDelete = $(this).data("user-id");
+                console.log('user id: ' + userIdToDelete);
+                $('#confirmModal').modal('show');
+            });
+
+            // When the "Eliminar" button in the modal is clicked, submit the form
+            $("#confirmDeleteBtn").on("click", function() {
+                if (userIdToDelete) {
+                    var deleteUrl = "{{ route('user.destroy', ':id') }}";
+                    deleteUrl = deleteUrl.replace(':id', userIdToDelete);
+                    console.log('delete url: ' + deleteUrl);
+                    var form = $("<form>", {
+                        method: "post",
+                        action: deleteUrl
+                    });
+
+                    // Add the CSRF token
+                    var csrfToken = $('meta[name="csrf-token"]').attr('content');
+                    var csrfField = $("<input>", {
+                        type: "hidden",
+                        name: "_token",
+                        value: csrfToken
+                    });
+                    form.append(csrfField);
+
+                    // Add the method field
+                    var methodField = $("<input>", {
+                        type: "hidden",
+                        name: "_method",
+                        value: "DELETE"
+                    });
+                    form.append(methodField);
+
+                    // Append the form to the document body and submit it
+                    form.appendTo("body").submit();
+                }
+            });
+
+        });
     </script>
 @stop
